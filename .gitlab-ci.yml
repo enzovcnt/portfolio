@@ -1,0 +1,61 @@
+image: jakzal/phpqa:php8.4
+
+before_script:
+    - composer install
+
+
+cache:
+    paths:
+        - vendor/
+
+stages:
+    - SecurityChecker
+    - CodingStandards
+    - UnitTests
+
+security-checker:
+    stage: SecurityChecker
+    script:
+        - local-php-security-checker --path=./composer.lock
+    allow_failure: false
+
+
+phpcs:
+    stage: CodingStandards
+    script:
+        - phpcs -v --standard=PSR12 --ignore=./src/Kernel.php ./src
+    allow_failure: false
+
+phpstan:
+    stage: CodingStandards
+    script:
+        - phpstan analyse ./src
+    allow_failure: false
+
+twig-lint:
+    stage: CodingStandards
+    script:
+        - twig-lint lint ./templates
+    allow_failure: false
+
+phpunit:
+    stage: UnitTests
+    image: php:8.4-apache
+    services:
+        - name: postgres:16-alpine
+          alias: psql
+    variables:
+        POSTGRES_DB: testbase_test
+        POSTGRES_USER: testuser
+        POSTGRES_PASSWORD: passpass
+    before_script:
+        - apt-get update && apt-get install -y git libzip-dev libpq-dev postgresql-client
+        - curl -sSk https://getcomposer.org/installer | php -- --disable-tls && mv composer.phar /usr/local/bin/composer
+        - docker-php-ext-install pgsql pdo pdo_pgsql zip
+        - php bin/console doctrine:database:drop --force --env=test
+        - php bin/console doctrine:database:create --env=test
+        - php bin/console doctrine:migration:migrate --env=test --no-interaction
+        - php bin/console importmap:install
+    script:
+        - php bin/phpunit
+    allow_failure: false
