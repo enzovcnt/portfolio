@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un projet{% endblock %}
+
+{% block body %}
+    <section class="bg-yellow-50 px-6 py-20">
+        <h2 class="text-center text-3xl font-bold mb-8">Créer un nouveau projet</h2>
+
+        {{ form_start(form, { attr: { class: 'max-w-xl mx-auto space-y-6' } }) }}
+        <div>
+            {{ form_label(form.date, 'Date', { label_attr: { class: 'block text-sm font-semibold mb-1' } }) }}
+            {{ form_widget(form.date, { attr: { class: 'w-full border border-gray-300 rounded px-3 py-2' } }) }}
+        </div>
+        <div>
+            {{ form_label(form.name, 'Nom du projet', { label_attr: { class: 'block text-sm font-semibold mb-1' } }) }}
+            {{ form_widget(form.name, { attr: { class: 'w-full border border-gray-300 rounded px-3 py-2' } }) }}
+        </div>
+        <div>
+            {{ form_label(form.tech, 'Technologies', { label_attr: { class: 'block text-sm font-semibold mb-1' } }) }}
+            {{ form_widget(form.tech, { attr: { class: 'w-full border border-gray-300 rounded px-3 py-2' } }) }}
+        </div>
+        <div>
+            {{ form_label(form.link, 'Lien', { label_attr: { class: 'block text-sm font-semibold mb-1' } }) }}
+            {{ form_widget(form.link, { attr: { class: 'w-full border border-gray-300 rounded px-3 py-2' } }) }}
+        </div>
+        <div>
+            {{ form_label(form.detail, 'Détails', { label_attr: { class: 'block text-sm font-semibold mb-1' } }) }}
+            {{ form_widget(form.detail, { attr: { class: 'w-full border border-gray-300 rounded px-3 py-2' } }) }}
+        </div>
+
+        <div>
+            <button type="submit" class="bg-maroon text-white px-6 py-2 rounded hover:bg-maroon/90">
+                Enregistrer
+            </button>
+        </div>
+        {{ form_end(form) }}
+    </section>
+{% endblock %}

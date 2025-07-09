@@ -1,11 +1,163 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Enzo VINCENT{% endblock %}
 
 {% block body %}
+<div class="relative">
+
+{#    <svg#}
+{#        id="gold-path"#}
+{#        class="absolute top-0 left-0 z-10 pointer-events-none"#}
+{#        width="100%"#}
+{#        height="2600"#}
+{#        viewBox="0 0 1440 2600"#}
+{#        xmlns="http://www.w3.org/2000/svg"#}
+{#    >#}
+{#        <path#}
+{#            id="gold-path-line"#}
+{#            d="#}
+{#            M50 0#}
+{#            L50 600    <!-- about -->#}
+{#            L1390 600#}
+{#            L1390 1200 <!-- parcours -->#}
+{#            L50 1200#}
+{#            L50 2000   <!-- projets -->#}
+{#            L1390 2000#}
+{#            L1390 2600 <!-- contact -->#}
+{#        "#}
+{#            stroke="#FFD700"#}
+{#            stroke-width="4"#}
+{#            fill="none"#}
+{#            stroke-dasharray="3500"#}
+{#            stroke-dashoffset="3500"#}
+{#        />#}
+{#    </svg>#}
 
 
 
 
+    <section id="about" class="h-screen pt-24 mt-10 bg-maroon text-white px-6 py-20 flex flex-col md:flex-row items-center justify-center gap-8">
+        <div class="flex-shrink-0">
+            <img src="{{ asset('/home/ev/Documents/moi/portfolio/assets/image/IMG_4661.JPG') }}" class="w-40 h-40 rounded-full" alt="Moi" />
+        </div>
+        <div class="max-w-2xl text-center md:text-left">
+            <h1 class="text-4xl font-bold">TITRE EN GROS</h1>
+            <p class="mt-2">
+                Passionné par l’histoire et le développement web, je me suis reconverti après une licence en Histoire.
+                Aujourd’hui, je crée des sites web performants, accessibles et esthétiques avec Symfony et Tailwind.
+            </p>
+            <div class="mt-4 space-x-4">
+                <a href="#" class="bg-yellow-500 text-maroon px-4 py-2 rounded">CV</a>
+                <a href="#contact" class="bg-white text-maroon px-4 py-2 rounded">Contact</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="parcours" class="relative bg-yellow-50 px-6 py-20">
+        <h2 class="text-center text-2xl font-bold mb-12">Mon Parcours</h2>
+
+        <div class="relative flex flex-col items-center space-y-16">
+
+            <div class="flex flex-col items-center">
+                <div class="text-center mb-2 font-semibold">BAC général ES</div>
+                <div class="w-32 h-32 rounded-full bg-white border-4 border-yellow-500 flex items-center justify-center shadow-lg overflow-hidden">
+                    <img src="/assets/image/IMG_4661.JPG" alt="Bac" class="w-full h-full object-cover">
+                </div>
+                <div class="w-1 h-16 bg-yellow-500"></div>
+                <svg class="w-6 h-6 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 4v16m0 0l-6-6m6 6l6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+
+            <div class="flex flex-col items-center">
+                <div class="text-center mb-2 font-semibold">Licence Histoire</div>
+                <div class="w-32 h-32 rounded-full bg-white border-4 border-yellow-500 flex items-center justify-center shadow-lg overflow-hidden">
+                    <img src="/image/histoire.png" alt="Licence" class="w-full h-full object-cover">
+                </div>
+                <div class="w-1 h-16 bg-yellow-500"></div>
+                <svg class="w-6 h-6 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 4v16m0 0l-6-6m6 6l6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+
+            <div class="flex flex-col items-center">
+                <div class="text-center mb-2 font-semibold">Bachelor Dev Web</div>
+                <div class="w-32 h-32 rounded-full bg-white border-4 border-yellow-500 flex items-center justify-center shadow-lg overflow-hidden">
+                    <img src="/image/dev.png" alt="Dev Web" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section id="projets" class="bg-maroon text-white px-6 py-20">
+        <h2 class="text-2xl font-bold mb-8">Mes projets</h2>
+
+        <div class="mt-10">
+            <table class="w-full table-auto border border-white">
+                <thead>
+                <tr class="bg-yellow-600 text-black">
+                    <th class="p-2">Date</th>
+                    <th class="p-2">Projet</th>
+                    <th class="p-2">Technos</th>
+                    <th class="p-2">Lien</th>
+                    <th class="p-2">Détails</th>
+                </tr>
+                </thead>
+                {% for project in projects %}
+                <tbody>
+                <tr class="border-t border-white text-center">
+                    <td class="p-2">{{ project.date }}</td>
+                    <td class="p-2">{{ project.name }}</td>
+                    <td class="p-2">{{ project.tech }}</td>
+                    <td class="p-2"><a href="{{ project.link }}" class="underline">{{ project.link }}</a></td>
+                    <td class="p-2">
+                        <button class="toggle-details text-yellow-300 underline">Voir</button>
+                    </td>
+                </tr>
+                <tr class="details hidden bg-yellow-100 text-black">
+                    <td colspan="5" class="p-4">
+                        {{ project.detail }}
+                    </td>
+                </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+        </div>
+    </section>
+
+
+    <section id="contact" class="bg-yellow-50 px-6 py-20">
+        <h2 class="text-center text-2xl font-bold mb-8">Contact</h2>
+
+        {% for message in app.flashes('success') %}
+            <div class="bg-green-200 text-green-800 p-4 rounded mb-4 text-center">{{ message }}</div>
+        {% endfor %}
+
+        {{ form_start(contactForm, { attr: { class: 'max-w-md mx-auto space-y-4' } }) }}
+        {{ form_widget(contactForm.nom, { attr: { placeholder: 'Nom', class: 'w-full border p-2 rounded' } }) }}
+        {{ form_widget(contactForm.email, { attr: { placeholder: 'Email', class: 'w-full border p-2 rounded' } }) }}
+        {{ form_widget(contactForm.message, { attr: { placeholder: 'Message', class: 'w-full border p-2 rounded' } }) }}
+
+        <button type="submit" class="bg-maroon text-white px-4 py-2 rounded">Envoyer</button>
+        {{ form_end(contactForm) }}
+    </section>
+
+</div>
+
+
+    <script>
+
+        document.querySelectorAll('.toggle-details').forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const detailRow = btn.closest('tr').nextElementSibling;
+                detailRow.classList.toggle('hidden');
+                btn.textContent = detailRow.classList.contains('hidden') ? 'Voir' : 'Cacher';
+            });
+        });
+    </script>
 
 {% endblock %}

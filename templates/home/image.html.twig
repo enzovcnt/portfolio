@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une image{% endblock %}
+
+{% block body %}
+    <section class="bg-yellow-50 px-6 py-20">
+        <h2 class="text-center text-3xl font-bold mb-8">Ajouter une image au projet : {{ projet.name }}</h2>
+
+        {{ form_start(formImage, { attr: { class: 'max-w-md mx-auto space-y-6' } }) }}
+        <div>
+            {{ form_label(formImage.imageFile, null, { label_attr: { class: 'block text-sm font-semibold mb-1' } }) }}
+            {{ form_widget(formImage.imageFile, { attr: { class: 'dropzone w-full border border-dashed border-gray-400 rounded px-3 py-6 text-center cursor-pointer' } }) }}
+        </div>
+        <div>
+            <button type="submit" class="bg-maroon text-white px-6 py-2 rounded hover:bg-maroon/90">
+                Ajouter
+            </button>
+        </div>
+        {{ form_end(formImage) }}
+    </section>
+
+
+    <style>
+        .dropzone {
+            background-color: white;
+            transition: border-color 0.2s ease;
+        }
+
+        .dropzone:hover {
+            border-color: #FFD700;
+        }
+    </style>
+
+{% endblock %}
